@@ -1,0 +1,77 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{titlecase}[2025/12/12 Automatic title case formatting for titles and sections]
+
+% Required packages
+\RequirePackage{mfirstuc}
+\RequirePackage{xparse}
+\RequirePackage{letltxmacro}
+
+% Capitalize each part of hyphenated words (e.g., vision-language -> Vision-Language)
+\MFUhyphentrue
+
+% Define words not to capitalize
+\forcsvlist{\MFUnocap}{a,an,the,and,but,or,nor,for,so,yet,as,at,by,from,in,of,on,to,with,via,per,without}
+
+% Define the titlecase command
+\newcommand{\titlecase}[1]{\xcapitalisewords{#1}}
+
+% Helper to redefine sectioning commands with titlecase
+\ExplSyntaxOn
+\NewDocumentCommand{\redefinesectioncmd}{mm}{
+	\LetLtxMacro{#1}{#2}
+	\RenewDocumentCommand{#2}{som}{
+		\IfBooleanTF{##1}
+			{#1*{\titlecase{##3}}}
+			{\IfNoValueTF{##2}
+				{#1{\titlecase{##3}}}
+				{#1[\titlecase{##2}]{\titlecase{##3}}}
+			}
+	}
+}
+\cs_new:Npn \__titlecase_redefine_section:n #1 {
+	\exp_args:Ncc \redefinesectioncmd {original#1}{#1}
+}
+\NewDocumentCommand{\redefinesections}{m}{
+	\clist_map_function:nN {#1} \__titlecase_redefine_section:n
+}
+\ExplSyntaxOff
+
+% Store sections to redefine and flag for title
+\def\titlecase@sections{}
+\newif\iftitlecase@title
+\titlecase@titlefalse
+
+% Declare option for title
+\DeclareOption{title}{\titlecase@titletrue}
+
+% Declare options for common sectioning commands
+\DeclareOption{section}{\edef\titlecase@sections{\titlecase@sections,section}}
+\DeclareOption{subsection}{\edef\titlecase@sections{\titlecase@sections,subsection}}
+\DeclareOption{subsubsection}{\edef\titlecase@sections{\titlecase@sections,subsubsection}}
+\DeclareOption{paragraph}{\edef\titlecase@sections{\titlecase@sections,paragraph}}
+\DeclareOption{subparagraph}{\edef\titlecase@sections{\titlecase@sections,subparagraph}}
+
+% Option to apply to all standard sectioning commands and title
+\DeclareOption{all}{%
+	\titlecase@titletrue
+	\def\titlecase@sections{section,subsection,subsubsection,paragraph,subparagraph}%
+}
+
+% Process options
+\ProcessOptions\relax
+
+% Apply titlecase to title if requested
+\iftitlecase@title
+	\LetLtxMacro{\originaltitle}{\title}
+	\RenewDocumentCommand{\title}{m}{\originaltitle{\titlecase{#1}}}
+\fi
+
+% Apply titlecase to specified sections
+\ifx\titlecase@sections\@empty
+	% If no sections specified, do nothing
+\else
+	% Remove leading comma if present
+	\expandafter\redefinesections\expandafter{\titlecase@sections}
+\fi
+
+\endinput
