@@ -2,25 +2,23 @@
 
 Automatic title case formatting for LaTeX titles and sectioning commands.
 
-## Features
-- Provides a `\titlecase{...}` command for manual use.
-- Optional automatic title-casing for `\title` and common sectioning commands.
-- Lowercases common short words (per `mfirstuc` rules).
-- Capitalizes each part of hyphenated words (e.g., `vision-language` -> `Vision-Language`).
+## Example output
+Rendered headings from the usage example below (before: without titlecase, after: with titlecase):
 
-## Installation
-- Place `titlecase.sty` next to your `.tex` file, or
-- Install into your local texmf tree (for example, `~/texmf/tex/latex/titlecase/`) and run `mktexlsr` if your TeX distribution requires it.
+| Before | After |
+| --- | --- |
+| ![before](docs/example-before.png) | ![after](docs/example.png) |
 
 ## Usage
 ```tex
+\documentclass{article}
 \usepackage[title,section]{titlecase}
 
 \title{an example of title case in latex}
-\section{vision-language models in the wild}
 
 \begin{document}
 \maketitle
+\section{vision-language models in the wild}
 \end{document}
 ```
 
@@ -34,14 +32,17 @@ Manual use anywhere:
 \titlecase{an on-the-fly example for the title}
 ```
 
-## Example output
-Rendered headings from the usage example above:
 
-![Example output](docs/example.png)
-```text
-An Example of Title Case in Latex
-Vision-Language Models in the Wild
-```
+
+## Features
+- Provides a `\titlecase{...}` command for manual use.
+- Optional automatic title-casing for `\title` and common sectioning commands.
+- Lowercases common short words (per `mfirstuc` rules).
+- Capitalizes each part of hyphenated words (e.g., `vision-language` -> `Vision-Language`).
+
+## Installation
+- Place `titlecase.sty` next to your `.tex` file, or
+- Install into your local texmf tree (for example, `~/texmf/tex/latex/titlecase/`) and run `mktexlsr` if your TeX distribution requires it.
 
 ## Options
 - `title`
