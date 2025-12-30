@@ -34,6 +34,15 @@ Manual use anywhere:
 \titlecase{an on-the-fly example for the title}
 ```
 
+## Example output
+Rendered headings from the usage example above:
+
+![Example output](docs/example.png)
+```text
+An Example of Title Case in Latex
+Vision-Language Models in the Wild
+```
+
 ## Options
 - `title`
 - `section`
