@@ -1,5 +1,33 @@
+% titlecase.sty
+% Automatic title case formatting for LaTeX titles and sectioning commands.
+%
+% Copyright (c) 2025 Jae Hee Lee
+% License: MIT (see LICENSE)
+% URL: https://github.com/dschaehi/titlecase
+%
+% Usage:
+%   \usepackage[title,section]{titlecase}
+%   \title{an example of title case in latex}
+%   \section{vision-language models in the wild}
+%
+%   Apply to all standard sectioning commands and title:
+%   \usepackage[all]{titlecase}
+%
+%   Manual use:
+%   \titlecase{an on-the-fly example for the title}
+%
+% Options:
+%   title, section, subsection, subsubsection, paragraph, subparagraph, all
+%
+% Notes:
+%   - Small words are lowercased per mfirstuc rules.
+%   - Add more words with \MFUnocap{<word>} after loading.
+%
+% Requirements:
+%   mfirstuc, xparse, letltxmacro
+%
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{titlecase}[2025/12/12 Automatic title case formatting for titles and sections]
+\ProvidesPackage{titlecase}[2025/12/12 v0.1 Automatic title case formatting for titles and sections]
 
 % Required packages
 \RequirePackage{mfirstuc}
