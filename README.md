@@ -3,23 +3,14 @@
 Automatic title case formatting for LaTeX titles and sectioning commands.
 
 ## Example output
-Rendered headings from the usage example below (before: without titlecase, after: with titlecase):
-
 | Before | After |
 | --- | --- |
 | ![before](docs/example-before.png) | ![after](docs/example.png) |
 
 ## Usage
+Apply to `\title` and `\section`:
 ```tex
-\documentclass{article}
 \usepackage[title,section]{titlecase}
-
-\title{an example of title case in latex}
-
-\begin{document}
-\maketitle
-\section{vision-language models in the wild}
-\end{document}
 ```
 
 Apply to all standard sectioning commands and `\title`:
@@ -31,8 +22,6 @@ Manual use anywhere:
 ```tex
 \titlecase{an on-the-fly example for the title}
 ```
-
-
 
 ## Features
 - Provides a `\titlecase{...}` command for manual use.
