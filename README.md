@@ -3,7 +3,7 @@
 Automatic title case formatting for LaTeX titles and sectioning commands.
 
 ## Example output
-| Before | After |
+| Before ([source](docs/example-before.tex))| After ([source](docs/example.tex))|
 | --- | --- |
 | ![before](docs/example-before.png) | ![after](docs/example.png) |
 
